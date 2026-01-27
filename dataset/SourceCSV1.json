@@ -1,10 +1,6 @@
 {
 	"name": "SourceCSV1",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "LinkedSource",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

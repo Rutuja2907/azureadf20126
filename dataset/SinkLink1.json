@@ -1,10 +1,6 @@
 {
 	"name": "SinkLink1",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "SinkLinked1",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
