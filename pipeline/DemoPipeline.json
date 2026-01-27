@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Activity 1",
+				"name": "Activity1",
 				"description": "i need to copy data from 1 container to another",
 				"type": "Copy",
 				"dependsOn": [],
@@ -40,13 +40,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ADLSsourceLinkedService",
+						"referenceName": "ADLSSourceLinkedService1",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "Json1",
+						"referenceName": "Json2",
 						"type": "DatasetReference"
 					}
 				]
