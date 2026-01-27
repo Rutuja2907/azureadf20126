@@ -13,7 +13,7 @@
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
-			"defaultValue": "https://storagebrowsejobs200126.dfs.core.windows.net/"
+			"defaultValue": "https://storagebrowsejobs27126.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
@@ -38,7 +38,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/ADLSsourceLinkedService')]",
+			"name": "[concat(parameters('factoryName'), '/ADLSSourceLinkedService1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -52,7 +52,7 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": "customers-100.csv",
-						"fileSystem": "democontainer20126"
+						"fileSystem": "sourcecontainer"
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
@@ -138,13 +138,36 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Json2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "targetcontainer"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DemoPipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "Activity 1",
+						"name": "Activity1",
 						"description": "i need to copy data from 1 container to another",
 						"type": "Copy",
 						"dependsOn": [],
@@ -181,14 +204,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "ADLSsourceLinkedService",
+								"referenceName": "ADLSSourceLinkedService1",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "Json1",
+								"referenceName": "Json2",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -201,8 +224,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/ADLSsourceLinkedService')]",
-				"[concat(variables('factoryId'), '/datasets/Json1')]"
+				"[concat(variables('factoryId'), '/datasets/ADLSSourceLinkedService1')]",
+				"[concat(variables('factoryId'), '/datasets/Json2')]"
 			]
 		}
 	]

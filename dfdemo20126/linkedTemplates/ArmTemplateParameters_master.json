@@ -9,7 +9,7 @@
 			"value": ""
 		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
-			"value": "https://storagebrowsejobs200126.dfs.core.windows.net/"
+			"value": "https://storagebrowsejobs27126.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"value": ""
