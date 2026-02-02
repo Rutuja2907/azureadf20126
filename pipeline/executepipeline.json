@@ -1,5 +1,5 @@
 {
-	"name": "ifcondition",
+	"name": "executepipeline",
 	"properties": {
 		"activities": [
 			{
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "DelimitedText12",
+						"referenceName": "DelimitedText13",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -24,7 +24,6 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
-						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -49,55 +48,27 @@
 						"value": "@activity('Get Metadata1').output.exists",
 						"type": "Expression"
 					},
-					"ifFalseActivities": [
-						{
-							"name": "false condition",
-							"type": "SetVariable",
-							"dependsOn": [],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "value2",
-								"value": {
-									"value": "@activity('Get Metadata1').output.exists",
-									"type": "Expression"
-								}
-							}
-						}
-					],
 					"ifTrueActivities": [
 						{
-							"name": "True condition",
-							"type": "SetVariable",
+							"name": "Execute Pipeline1",
+							"type": "ExecutePipeline",
 							"dependsOn": [],
 							"policy": {
-								"secureOutput": false,
 								"secureInput": false
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "value1",
-								"value": {
-									"value": "@activity('Get Metadata1').output.exists",
-									"type": "Expression"
-								}
+								"pipeline": {
+									"referenceName": "Lookupactivity",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true
 							}
 						}
 					]
 				}
 			}
 		],
-		"variables": {
-			"value1": {
-				"type": "Boolean"
-			},
-			"value2": {
-				"type": "Boolean"
-			}
-		},
 		"annotations": []
 	}
 }
